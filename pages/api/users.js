@@ -31,5 +31,29 @@ export default async function users(req, res) {
         })
         return res.json(user)
     }
+    if (req.method == 'PUT') {
+        const { id, email, cel, firstName, secondName, familyName, lastName, birthday, assignedAnalyst } = req.body
+        if (!id || !email || !cel || !firstName || !secondName || !familyName || !lastName || !birthday || !assignedAnalyst)
+            return res.status(400).json({ message: 'bad request' })
+        const user = await prisma.user.update({
+            data: {
+                email, cel, firstName, secondName, familyName, lastName, birthday, assignedAnalyst
+            },
+            where: {
+                id
+            }
+        })
+        return res.json({ message: 'ok', user })
+    }
+    if (req.method == 'DELETE') {
+        const { id } = req.body
+        if (!id) return res.status(400).json({ message: 'bad request' })
+        await prisma.user.delete({
+            where: {
+                id
+            }
+        })
+        return res.json({ message: 'ok' })
+    }
     return res.status(400).json({ message: 'bad request' })
 }
