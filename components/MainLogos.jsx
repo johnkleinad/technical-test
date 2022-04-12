@@ -10,44 +10,44 @@ export const GradientLogo = ({ width = 400, height = 90 }) => {
         <path d="M368.76 35.64H373C374.145 35.6243 375.238 35.1597 376.044 34.3462C376.85 33.5326 377.305 32.4352 377.31 31.29V22.18C377.307 21.0331 376.854 19.9331 376.048 19.1174C375.241 18.3017 374.147 17.8358 373 17.82H368.79C367.644 17.8358 366.55 18.3021 365.746 19.118C364.941 19.934 364.49 21.034 364.49 22.18V31.29C364.492 32.4292 364.94 33.5222 365.738 34.3352C366.537 35.1481 367.621 35.6165 368.76 35.64Z" fill="url(#paint7_linear_2_75)" />
         <defs>
             <linearGradient id="paint0_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
             <linearGradient id="paint1_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
             <linearGradient id="paint2_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
             <linearGradient id="paint3_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
             <linearGradient id="paint4_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
             <linearGradient id="paint5_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
             <linearGradient id="paint6_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
             <linearGradient id="paint7_linear_2_75" x1="4.25532" y1="45.6" x2="400" y2="45.6" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#FC8649" />
-                <stop offset="0.481421" stop-color="#9E5FEB" />
-                <stop offset="1" stop-color="#5293F1" />
+                <stop stopColor="#FC8649" />
+                <stop offset="0.481421" stopColor="#9E5FEB" />
+                <stop offset="1" stopColor="#5293F1" />
             </linearGradient>
         </defs>
     </svg>
