@@ -15,7 +15,7 @@ export default function Home() {
     <motion.div
       animate={{ opacity: [0, 1] }}
       transition={{ duration: 2 }}
-      className="absolute inset-0 center">
+      className="absolute inset-0 center opacity-0">
       <GradientLogo width={300} />
     </motion.div>
   </>
