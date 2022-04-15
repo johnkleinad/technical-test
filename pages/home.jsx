@@ -10,8 +10,8 @@ const Home = () => {
     }, [])
     return <>
         <section className="absolute inset-0 p-4 bg-gray-scale-10">
-            <h2>Usuarios</h2>
-            <div>
+            <h2 className="text-3xl font-semibold">Usuarios</h2>
+            <div className="my-2">
                 {users.map((user, key) => <UserInfoCard key={key} data={user}/>)}
             </div>
         </section>
