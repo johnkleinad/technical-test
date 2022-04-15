@@ -63,8 +63,8 @@ const SelectOptions = ({showStatus}) => {
                 <div className="center text-xs text-neutral-400 py-5 font-semibold">
                     <span>Agrega un status al usuario.</span>
                 </div>
-                {['Pendiente', 'En Proceso', 'Completado'].map((statusOption) =>
-                    <option className='h-12 w-full center' value={statusOption}>
+                {['Pendiente', 'En Proceso', 'Completado'].map((statusOption, key) =>
+                    <option key={key} className='h-12 w-full center' value={statusOption}>
                         <button className='hover:bg-neutral-900'>{statusOption}</button>
                     </option>)}
             </div>
