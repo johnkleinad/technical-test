@@ -23,7 +23,7 @@ export const FadeIn = ({ children, show }) => {
         </AnimatePresence>
     </>
 }
-export const FadeInModal = ({ children, show, set }) => {
+export const FadeInModal = ({ children, show, set, className, speed = 0.4}) => {
     const variants = {
         hidden: { x: 0, y: 1000 },
         enter: { x: 0, y: 0 },
@@ -44,8 +44,8 @@ export const FadeInModal = ({ children, show, set }) => {
                     animate='enter'
                     exit='exit'
                     variants={variants}
-                    transition={{ duration: 0.4, type: 'easeInOut' }}
-                    className='absolute bottom-0 inset-x-0'
+                    transition={{ duration: speed, type: 'easeInOut' }}
+                    className={className}
                 >
                     {children}
                 </motion.div>
