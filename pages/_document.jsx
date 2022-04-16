@@ -3,7 +3,9 @@ import { Html, Head, Main, NextScript } from 'next/document'
 export default function Document() {
     return (
         <Html lang="es">
-            <Head />
+            <Head>
+            <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover' ></meta>
+            </Head>
             <body>
                 <Main />
                 <NextScript />
