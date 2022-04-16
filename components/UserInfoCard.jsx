@@ -1,26 +1,33 @@
 import { createRef, useState } from 'react'
-import { motion } from 'framer-motion';
-import { FadeIn } from './Animate';
+import { FadeInModal } from './Animate';
+import ModalOptions from './ModalOptions';
+import { IoCopy, IoCreateOutline } from "react-icons/io5";
 
 const UserInfoCard = ({ data }) => {
     const { firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id } = data
     const [isOpenCard, setIsOpenCard] = useState();
     const [showStatus, setShowStatus] = useState();
+    const [userStatus, setUserStatus] = useState(data.status);
     const userId = createRef();
     const copyToClipboard = (msg) => {
         userId.current.select();
         userId.current.setSelectionRange(0, 99999);
         window.document.execCommand("copy");
-        alert("Código copiado al portapapeles");
+        alert("ID copiado al portapapeles");
     };
-
+    const statusOptions = [
+        { name: 'PENDIENTE', color: 'bg-neutral-400' },
+        { name: 'EN PROCESO', color: 'bg-yellow-500' },
+        { name: 'COMPLETADO', color: 'bg-green-600' }
+    ]
+    const colorStatus = statusOptions.find((color) => color.name == userStatus)
     return <>
-        <div className='shadow-lg rounded-lg w-full flex p-3 border border-gray-300 h-[300px] text-sm mb-5'>
+        <div className=' w-full flex p-2 px-4 h-[250px] text-sm mb-5'>
             <div className="flex flex-col justify-between w-full">
                 <div className="flex flex-col">
                     <span className="text-primary-50 font-semibold capitalize">{`${firstName} ${secondName} ${familyName} ${lastName}`}</span>
-                    <button onClick={() => copyToClipboard(id)} className="text-gray-300 ">
-                        icon ID: <input ref={userId} disabled className=' truncate' value={id} />
+                    <button onClick={() => copyToClipboard(id)} className="text-neutral-400 center-y">
+                        <IoCopy/> <span className="mx-2">ID: <input ref={userId} disabled className='truncate text-black' value={id} /></span>
                     </button>
                 </div>
                 <div className="flex flex-col">
@@ -42,9 +49,11 @@ const UserInfoCard = ({ data }) => {
                     </div>
                 </div>
                 <div className="flex justify-between whitespace-nowrap w-full">
-                    <select onClick={() => setShowStatus(!showStatus)} className="bg-primary-100 text-white rounded px-3 py-2">
-                        <SelectOptions showStatus={showStatus} />
-                    </select>
+                    <button
+                        onClick={() => setShowStatus(!showStatus)}
+                        className={`${colorStatus.color} text-white rounded px-3 py-2`}>
+                        {userStatus}
+                    </button>
                     <button
                         onClick={() => setIsOpenCard(!isOpenCard)}
                         className="bg-primary-100 text-white rounded  px-3 py-2">
@@ -52,28 +61,18 @@ const UserInfoCard = ({ data }) => {
                     </button>
                 </div>
             </div>
-        </div>
-    </>
-}
-const SelectOptions = ({showStatus}) => {
-    <FadeIn show={showStatus}>
-        <div onClick={() => setShowStatus(false)} className="fixed inset-0 bg-black/30" />
-        <div className='absolute w-full shadow bottom-0 inset-x-0 px-1 flex justify-end flex-col text-gray-scale-50'>
-            <div className="flex flex-col bg-neutral-900/80 backdrop-blur-sm rounded-xl divide-y divide-neutral-500 overflow-hidden">
-                <div className="center text-xs text-neutral-400 py-5 font-semibold">
-                    <span>Agrega un status al usuario.</span>
-                </div>
-                {['Pendiente', 'En Proceso', 'Completado'].map((statusOption, key) =>
-                    <option key={key} className='h-12 w-full center' value={statusOption}>
-                        <button className='hover:bg-neutral-900'>{statusOption}</button>
-                    </option>)}
+            <div className='w-10'>
+                <IoCreateOutline size={20}/>
             </div>
-            <button
-                onClick={() => setShowStatus(false)}
-                className='w-full bg-neutral-900/80 h-12 rounded-xl my-1 text-red-600 backdrop-blur-sm'>
-                Cancelar
-            </button>
         </div>
-    </FadeIn>
+        <FadeInModal show={showStatus} set={setShowStatus}>
+            <ModalOptions
+                message={'Agrega un status al usuario.'}
+                arrayOpiopns={statusOptions}
+                selection={setUserStatus}
+                close={setShowStatus}
+            />
+        </FadeInModal>
+    </>
 }
 export default UserInfoCard;
