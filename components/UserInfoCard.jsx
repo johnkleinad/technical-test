@@ -25,9 +25,9 @@ const UserInfoCard = ({ data }) => {
         <div className=' w-full flex p-2 px-4 h-[250px] text-sm mb-5'>
             <div className="flex flex-col justify-between w-full">
                 <div className="flex flex-col">
-                    <span className="text-primary-50 font-semibold capitalize">{`${firstName} ${secondName} ${familyName} ${lastName}`}</span>
+                    <span className="text-primary-50 font-semibold capitalize select-none">{`${firstName} ${secondName} ${familyName} ${lastName}`}</span>
                     <button onClick={() => copyToClipboard(id)} className="text-neutral-400 center-y">
-                        <IoCopy/> <span className="mx-2">ID: <input ref={userId} disabled className='truncate text-black' value={id} /></span>
+                        <IoCopy/> <span className="mx-2">ID: <input ref={userId} disabled className='truncate text-black -z-10' value={id} /></span>
                     </button>
                 </div>
                 <div className="flex flex-col">
@@ -61,7 +61,7 @@ const UserInfoCard = ({ data }) => {
                     </button>
                 </div>
             </div>
-            <div className='w-10'>
+            <div className='w-10 center-x'>
                 <IoCreateOutline size={20}/>
             </div>
         </div>
