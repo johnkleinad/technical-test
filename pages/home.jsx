@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import UserInfoCard from "../components/UserInfoCard";
+import MainLayout from "../layout/Main";
 
 const Home = () => {
     const [users, setUsers] = useState([])
@@ -9,12 +10,13 @@ const Home = () => {
             .then((r) => setUsers(r))
     }, [])
     return <>
-        <section className="absolute inset-0 p-4 bg-gray-scale-10">
-            <h2 className="text-3xl font-semibold">Usuarios</h2>
-            <div className="my-2">
-                {users.map((user, key) => <UserInfoCard key={key} data={user}/>)}
+        <MainLayout title={'Usuarios'}>
+            <div className="my-2 py-5 divide-y divide-neutral-300">
+                {users.map((user, key) => <UserInfoCard key={key} data={user} />)}
+                {users.map((user, key) => <UserInfoCard key={key} data={user} />)}
+                {users.map((user, key) => <UserInfoCard key={key} data={user} />)}
             </div>
-        </section>
+        </MainLayout>
     </>
 }
 export default Home;
