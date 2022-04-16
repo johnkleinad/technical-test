@@ -3,8 +3,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import UseFromInputs from "../hooks/UseFromInputs";
 
-const SearchBar = () => {
-    const [isOnFocus, setIsOnFocus] = useState(true);
+const SearchBar = ({ isOnFocus, setIsOnFocus }) => {
     const [showDeleteAll, setSowDeleteAll] = useState(false);
     const search = UseFromInputs();
     useEffect(() => {
@@ -35,7 +34,7 @@ const SearchBar = () => {
                 {showDeleteAll &&
                     <IoCloseCircleSharp
                         color="#a0a0a0"
-                        onClick={() => search.setValue('')}
+                        onClick={() => search.setValue()}
                     />}
             </div>
             <AnimatePresence>
