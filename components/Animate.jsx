@@ -15,7 +15,7 @@ export const FadeIn = ({ children, show, className }) => {
                     animate='enter'
                     exit='exit'
                     variants={variants}
-                    transition={{ duration: 0.3, type: 'easeInOut' }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className={className}
                 >
                     {children}
@@ -44,7 +44,7 @@ export const FadeInModal = ({ children, show, set, className, speed = 0.4}) => {
                     animate='enter'
                     exit='exit'
                     variants={variants}
-                    transition={{ duration: speed, type: 'easeInOut' }}
+                    transition={{ duration: speed, ease: 'easeInOut' }}
                     className={className}
                 >
                     {children}
