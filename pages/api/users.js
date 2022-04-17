@@ -32,12 +32,13 @@ export default async function users(req, res) {
         return res.status(200).json({ message: 'Usuario Agregado' })
     }
     if (req.method == 'PUT') {
-        const { id, email, cel, firstName, secondName, familyName, lastName, birthday, assignedAnalyst } = req.body
+        console.log(req.body);
+        const { id, email, cel, firstName, secondName, familyName, lastName, birthday, assignedAnalyst, status } = JSON.parse(req.body)
         if (!id || !email || !cel || !firstName || !secondName || !familyName || !lastName || !birthday || !assignedAnalyst)
             return res.status(400).json({ message: 'bad request' })
         const user = await prisma.user.update({
             data: {
-                email, cel, firstName, secondName, familyName, lastName, birthday, assignedAnalyst
+                email, cel, firstName, secondName, familyName, lastName, birthday, assignedAnalyst, status
             },
             where: {
                 id
