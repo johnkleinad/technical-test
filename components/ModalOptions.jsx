@@ -7,9 +7,9 @@ const ModalOptions = ({message, arrayOpiopns = [], close, selection }) => {
                     <span>{message}</span>
                 </div>
                 {arrayOpiopns.map((statusOption, key) =>
-                    <button key={key} onClick={() => { selection(statusOption.name), close(false) }}
+                    <button key={key} onClick={() => { selection(statusOption[0]), close(false) }}
                         className='h-12'>
-                        {statusOption.name}
+                        {statusOption[0]}
                     </button>
                 )}
             </div>
