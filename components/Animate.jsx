@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-export const FadeIn = ({ children, show }) => {
+export const FadeIn = ({ children, show, className }) => {
     const variants = {
         hidden: { opacity: 0, x: 0 },
         enter: { opacity: 1, x: 0 },
@@ -16,7 +16,7 @@ export const FadeIn = ({ children, show }) => {
                     exit='exit'
                     variants={variants}
                     transition={{ duration: 0.3, type: 'easeInOut' }}
-                    className='h-full'
+                    className={className}
                 >
                     {children}
                 </motion.div>}
