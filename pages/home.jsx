@@ -5,18 +5,16 @@ import CreateModal from "../components/CreateModal";
 import EditModal from "../components/EditModal";
 import UserInfoCard from "../components/UserInfoCard";
 import MainLayout from "../layout/Main";
+import useSWR from "swr";
 
 const Home = () => {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState([]);
     const [edit, setEdit] = useState(false);
     const [create, setCreate] = useState(false);
-    useEffect(() => {
-        fetch('/api/users')
-            .then((response) => response.json())
-            .then((r) => setUsers(r))
-            .catch((e) => console.log(e))
-    }, []);
+
+    const getData = url => fetch(url).then(r => r.json())
+    const { data, error } = useSWR('/api/users', getData);
     const getUser = (user) => {
         setUser(user)
         setEdit(true)
@@ -24,19 +22,7 @@ const Home = () => {
     return <>
         <MainLayout set={setCreate} title={'Usuarios'} modalOpen={edit || create}>
             <div className="my-2 pb-16 divide-y divide-neutral-300 dark:divide-neutral-600 mx-4">
-                {users.map((user, key) => <UserInfoCard
-                    key={key}
-                    data={user}
-                    setEdit={setEdit}
-                    getUser={getUser}
-                />)}
-                {users.map((user, key) => <UserInfoCard
-                    key={key}
-                    data={user}
-                    setEdit={setEdit}
-                    getUser={getUser}
-                />)}
-                {users.map((user, key) => <UserInfoCard
+                {data?.map((user, key) => <UserInfoCard
                     key={key}
                     data={user}
                     setEdit={setEdit}
