@@ -21,9 +21,23 @@ const EditModal = ({ setEdit, user }) => {
             input: UseFromInputs(uInput[1])
         }
     })
-    const submitEdit = () => {
+    const submitEdit = async () => {
         if (userInputs.some((userInput) => userInput.input.value == '')) return console.log('Necestia todos los parametros');
-        console.log(new User(userInputs.map((userInput) => userInput)));
+        const body = new User({value:userInputs.map((userInput) => userInput), status:userStatus});
+        console.log(body);
+        const response = await fetch('/api/users', {
+            method: 'PUT',
+            body: JSON.stringify(body)
+        })
+        if (!response.ok) return ('error del servidor')
+        const data = await response.json()
+        console.log(data);
+        if (data.message == 'ok') {
+            setEdit(false)
+            // setTimeout(() => {
+            //     Router.reload('/home')
+            // }, 800);
+        }
     }
     const deleteUser = (id) => {
         fetch('/api/users', {
@@ -38,7 +52,6 @@ const EditModal = ({ setEdit, user }) => {
         }, 800);
     }
     const colorStatus = statusOptions.find((status) => status.name == userStatus)
-    console.log(colorStatus);
     return <>
         <div className="flex relative justify-between h-12 dark:text-white">
             <button onClick={() => setEdit(false)}>Cancelar</button>
