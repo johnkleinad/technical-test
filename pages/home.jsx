@@ -21,7 +21,7 @@ const Home = () => {
     }
     return <>
         <MainLayout title={'Usuarios'} modalOpen={edit}>
-            <div className="my-2 py-5 divide-y divide-neutral-300">
+            <div className="my-2 pb-16 divide-y divide-neutral-300 dark:divide-neutral-600 mx-4">
                 {users.map((user, key) => <UserInfoCard
                     key={key}
                     data={user}
@@ -47,7 +47,7 @@ const Home = () => {
             {edit &&
                 <FadeInModal
                     show={edit}
-                    className={'fixed inset-0 top-10 bg-gray-scale-10 rounded-t-lg p-4'}
+                    className={'fixed inset-0 top-10 bg-gray-scale-10 dark:bg-neutral-900 rounded-t-lg p-4'}
                     speed={0.2}
                 >
                     <EditModal setEdit={setEdit} edit={edit} user={user} />

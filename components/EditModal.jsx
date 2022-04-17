@@ -26,14 +26,14 @@ const EditModal = ({ setEdit, user }) => {
     const colorStatus = statusOptions.find((status) => status.name == userStatus)
     console.log(colorStatus);
     return <>
-        <div className="flex relative justify-between h-12">
+        <div className="flex relative justify-between h-12 dark:text-white">
             <button onClick={() => setEdit(false)}>Cancelar</button>
             <div className="absolute inset-x-0 center font-semibold -top-2 text-lg">
                 <span>Editar</span>
             </div>
             <button onClick={submitEdit}>Listo</button>
         </div>
-        <div className="h-full">
+        <div className="h-full overflow-y-auto pb-12">
             {userInputs.map((uInput, index) => {
                 return index > 0 && index < 8 &&
                     <div className="">
@@ -47,6 +47,11 @@ const EditModal = ({ setEdit, user }) => {
                 onClick={() => setShowStatus(!showStatus)}
                 className={`${colorStatus.color} text-white rounded px-3 py-2 mt-2 w-full`}>
                 {userStatus}
+            </button>
+            <button
+                onClick={() => setShowStatus(!showStatus)}
+                className={`bg-red-500 text-white rounded px-3 py-2 mt-2 w-full`}>
+                Eliminar Usuario
             </button>
         </div>
         <FadeInModal

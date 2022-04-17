@@ -22,19 +22,19 @@ const SearchBar = ({ isOnFocus, setIsOnFocus }) => {
     return <>
         <div className="flex">
             <div
-                className="p-1 px-2 center-y bg-neutral-200 rounded-lg mx-4 w-full">
+                className="p-1 px-2 center-y bg-neutral-200 dark:bg-neutral-800 duration-300 rounded-lg mx-4 w-full">
                 <IoSearch color="#a0a0a0" />
                 <input
                     onFocus={() => setIsOnFocus(true)}
                     placeholder="Buscar"
-                    className="bg-transparent mx-1 w-full focus:outline-none "
+                    className="bg-transparent mx-1 w-full focus:outline-none dark:text-white"
                     type="text"
                     {...search}
                 />
                 {showDeleteAll &&
                     <IoCloseCircleSharp
                         color="#a0a0a0"
-                        onClick={() => search.setValue()}
+                        onClick={() => search.setValue('')}
                     />}
             </div>
             <AnimatePresence>

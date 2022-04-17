@@ -22,30 +22,30 @@ const UserInfoCard = ({ data, getUser }) => {
     ]
     const colorStatus = statusOptions.find((status) => status.name == userStatus)
     return <>
-        <div className=' w-full flex p-2 px-4 h-[250px] text-sm mb-5'>
+        <div className=' w-full flex p-2 px-0 h-[250px] text-sm mb-5'>
             <div className="flex flex-col justify-between w-full">
                 <div className="flex flex-col">
-                    <span className="text-primary-50 font-semibold capitalize select-none">{`${firstName} ${secondName} ${familyName} ${lastName}`}</span>
+                    <span className="text-primary-50 dark:text-white font-semibold capitalize select-none">{`${firstName} ${secondName} ${familyName} ${lastName}`}</span>
                     <button onClick={() => copyToClipboard(id)} className="text-neutral-400 center-y">
-                        <IoCopy /> <span className="mx-2">ID: <input ref={userId} className='truncate select-none focus:outline-none' value={id} /></span>
+                        <IoCopy /> <span className="mx-2">ID: <input ref={userId} className='truncate select-none focus:outline-none bg-transparent' value={id} /></span>
                     </button>
                 </div>
                 <div className="flex flex-col">
                     <span className="text-neutral-400">MAIL</span>
-                    <span>{email}</span>
+                    <span className='dark:text-white'>{email}</span>
                 </div>
                 <div className="flex flex-col">
                     <span className="text-neutral-400">TELEFONO</span>
-                    <span>{cel}</span>
+                    <span className='dark:text-white'>{cel}</span>
                 </div>
                 <div className="flex justify-between">
                     <div className="flex flex-col">
                         <span className="text-neutral-400">F. DE NACIMIENTO</span>
-                        <span>{birthday}</span>
+                        <span className='dark:text-white'>{birthday}</span>
                     </div>
                     <div className="flex flex-col">
                         <span className="text-neutral-400">ANALISTA</span>
-                        <span>{assignedAnalyst}</span>
+                        <span className='dark:text-white'>{assignedAnalyst}</span>
                     </div>
                 </div>
                 <div className="flex justify-between whitespace-nowrap w-full">
@@ -61,7 +61,7 @@ const UserInfoCard = ({ data, getUser }) => {
                     </button>
                 </div>
             </div>
-            <button onClick={() => getUser(data)} className='w-10 center-x'>
+            <button onClick={() => getUser(data)} className='w-10 center-x dark:text-white'>
                 <IoCreateOutline size={20} />
             </button>
         </div>
