@@ -1,13 +1,25 @@
-import { createRef, useState } from 'react'
+import { createRef, useState, useEffect } from 'react'
 import { FadeInModal } from './Animate';
 import ModalOptions from './ModalOptions';
 import { IoCopy, IoCreateOutline } from "react-icons/io5";
+import UseUpdateUser from '../hooks/UseUpdateUser';
+import { User } from '../model/user'
 
 const UserInfoCard = ({ data, getUser }) => {
-    const { firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id } = data
+    const { firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id, status } = data
     const [isOpenCard, setIsOpenCard] = useState();
     const [showStatus, setShowStatus] = useState(false);
-    const [userStatus, setUserStatus] = useState(data.status);
+    const [userStatus, setUserStatus] = useState(status);
+    const { submitUpdate } = UseUpdateUser();
+    useEffect(() => {
+        setUserStatus(status);
+    }, [data])
+    useEffect(() => {
+        submitUpdate({
+            firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id,
+             status: userStatus
+        })
+    }, [userStatus])
     const userId = createRef();
     const copyToClipboard = (msg) => {
         userId.current.select();
@@ -15,12 +27,11 @@ const UserInfoCard = ({ data, getUser }) => {
         window.document.execCommand("copy");
         alert("ID copiado al portapapeles");
     };
-    const statusOptions = [
-        { name: 'PENDIENTE', color: 'bg-neutral-400' },
-        { name: 'EN PROCESO', color: 'bg-yellow-500' },
-        { name: 'COMPLETADO', color: 'bg-green-600' }
-    ]
-    const colorStatus = statusOptions.find((status) => status.name == userStatus)
+    const statusOptions = {
+        'PENDIENTE': 'bg-neutral-400',
+        'EN PROCESO': 'bg-yellow-500',
+        'COMPLETADO': 'bg-green-600'
+    }
     return <>
         <div className=' w-full flex p-2 px-0 h-[250px] text-sm mb-5'>
             <div className="flex flex-col justify-between w-full">
@@ -51,7 +62,7 @@ const UserInfoCard = ({ data, getUser }) => {
                 <div className="flex justify-between whitespace-nowrap w-full">
                     <button
                         onClick={() => setShowStatus(!showStatus)}
-                        className={`${colorStatus.color} text-white rounded px-3 py-2 w-32`}>
+                        className={`${statusOptions[userStatus]} text-white rounded px-3 py-2 w-32`}>
                         {userStatus}
                     </button>
                     <button
@@ -72,7 +83,7 @@ const UserInfoCard = ({ data, getUser }) => {
         >
             <ModalOptions
                 message={'Elige un estatus para el usuario.'}
-                arrayOpiopns={statusOptions}
+                arrayOpiopns={Object.entries(statusOptions)}
                 selection={setUserStatus}
                 close={setShowStatus}
             />
