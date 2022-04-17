@@ -61,7 +61,7 @@ const UserInfoCard = ({ data, getUser }) => {
                     </button>
                 </div>
             </div>
-            <button onClick={() => getUser(data)} className='w-10 center-x dark:text-white'>
+            <button onClick={() => getUser(data)} className='w-10 center-x text-black dark:text-white'>
                 <IoCreateOutline size={20} />
             </button>
         </div>
