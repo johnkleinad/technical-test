@@ -50,11 +50,10 @@ const CreateModal = ({ setCreate }) => {
     </div>
     <div>
       {userInputs.map((input, key) => {
-        return <div className="capitalize">
+        return <div key={key} className="capitalize">
           <CustomInputs
             name={input.name}
             value={input.input}
-            key={key}
           />
         </div>
       })}
