@@ -4,10 +4,12 @@ import { FadeInModal } from "./Animate"
 import CustomInput from "./CustomInput"
 import { User } from '../model/user'
 import ModalOptions from "./ModalOptions";
+import Router from "next/router";
 
 const EditModal = ({ setEdit, user }) => {
     const [showStatus, setShowStatus] = useState(false);
     const [userStatus, setUserStatus] = useState(user.status);
+    const [message, setMessage] = useState();
     const statusOptions = [
         { name: 'PENDIENTE', color: 'bg-neutral-400' },
         { name: 'EN PROCESO', color: 'bg-yellow-500' },
@@ -22,6 +24,18 @@ const EditModal = ({ setEdit, user }) => {
     const submitEdit = () => {
         if (userInputs.some((userInput) => userInput.input.value == '')) return console.log('Necestia todos los parametros');
         console.log(new User(userInputs.map((userInput) => userInput)));
+    }
+    const deleteUser = (id) => {
+        fetch('/api/users', {
+            method: 'DELETE',
+            body: JSON.stringify({ id: id })
+        })
+            .then((response) => response.json())
+            .then((r) => console.log(r))
+        setMessage('Usuario Eliminado con éxito')
+        setTimeout(() => {
+            Router.reload('/home')
+        }, 800);
     }
     const colorStatus = statusOptions.find((status) => status.name == userStatus)
     console.log(colorStatus);
@@ -49,10 +63,13 @@ const EditModal = ({ setEdit, user }) => {
                 {userStatus}
             </button>
             <button
-                onClick={() => setShowStatus(!showStatus)}
+                onClick={() => deleteUser(user.id)}
                 className={`bg-red-500 text-white rounded px-3 py-2 mt-2 w-full`}>
                 Eliminar Usuario
             </button>
+            <div className="center text-green-500">
+                <span>{message}</span>
+            </div>
         </div>
         <FadeInModal
             show={showStatus}
