@@ -11,6 +11,7 @@ const EditModal = ({ setEdit, user }) => {
     const [showStatus, setShowStatus] = useState(false);
     const [userStatus, setUserStatus] = useState(user.status);
     const [message, setMessage] = useState();
+    const [isConfirm, setIsConfirm] = useState(false);
     const update = UseUpdateUser()
     const statusOptions = {
         'PENDIENTE': 'bg-neutral-400',
@@ -23,9 +24,9 @@ const EditModal = ({ setEdit, user }) => {
             input: UseFromInputs(uInput[1])
         }
     })
-    const submitEdit =() => {
+    const submitEdit = () => {
         if (userInputs.some((userInput) => userInput.input.value == '')) return console.log('Necestia todos los parametros');
-        const body = new User({value:userInputs.map((userInput) => userInput), status:userStatus});
+        const body = new User({ value: userInputs.map((userInput) => userInput), status: userStatus });
         update.submitUpdate(body)
         console.log(update.res)
         setTimeout(() => {
@@ -68,7 +69,7 @@ const EditModal = ({ setEdit, user }) => {
                 {userStatus}
             </button>
             <button
-                onClick={() => deleteUser(user.id)}
+                onClick={() => setIsConfirm(true)}
                 className={`bg-red-500 text-white rounded px-3 py-2 mt-2 w-full`}>
                 Eliminar Usuario
             </button>
@@ -88,6 +89,36 @@ const EditModal = ({ setEdit, user }) => {
                 close={setShowStatus}
             />
         </FadeInModal>
+        <FadeInModal
+            show={isConfirm}
+            set={setIsConfirm}
+            className={'fixed inset-0 center'}
+        >
+            <ModalConfirm
+                close={setIsConfirm}
+                confirm={deleteUser}
+                id={user.id}
+                message={message}
+            />
+        </FadeInModal>
+    </>
+}
+const ModalConfirm = ({ confirm, close, id, message }) => {
+    return <>
+        <div className="bg-white/50 dark:bg-neutral-900/70 backdrop-blur-sm shadow-sm dark:text-white border dark:border-neutral-700 rounded-xl w-[280px] h-[196px]">
+            {
+                message ? <div className="p-5 h-full center text-center">
+                    {message}
+                </div>
+                    : <div className="divide-y divide-neutral-200 dark:divide-neutral-600 flex flex-col">
+                        <div className="p-5 text-center text-neutral-500 font-bold">
+                            <span>¿Estas seguro de eliminar este usuario?</span>
+                        </div>
+                        <button onClick={() => confirm(id)} className="py-3 text-lg">Aceptar</button>
+                        <button onClick={() => close(false)} className="py-3 text-lg text-red-500">Cancelar</button>
+                    </div>
+            }
+        </div>
     </>
 }
 export default EditModal;
