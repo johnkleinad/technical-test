@@ -14,7 +14,7 @@ const Home = () => {
     const [create, setCreate] = useState(false);
 
     const getData = url => fetch(url).then(r => r.json())
-    const { data } = useSWR('/api/users', getData);
+    const { data } = useSWR('/api/users', getData, { refreshInterval: 1000 });
     const getUser = (user) => {
         setUser(user)
         setEdit(true)
