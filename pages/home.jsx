@@ -10,7 +10,7 @@ const Home = () => {
     const [users, setUsers] = useState([]);
     const [user, setUser] = useState([]);
     const [edit, setEdit] = useState(false);
-    const [create, setCreate] = useState(true);
+    const [create, setCreate] = useState(false);
     useEffect(() => {
         fetch('/api/users')
             .then((response) => response.json())
