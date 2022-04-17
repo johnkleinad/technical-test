@@ -68,10 +68,10 @@ const UserInfoCard = ({ data, getUser }) => {
         <FadeInModal
             show={showStatus}
             set={setShowStatus}
-            className={'absolute bottom-0 inset-x-0'}
+            className={'fixed bottom-6 inset-x-0'}
         >
             <ModalOptions
-                message={'Agrega un status al usuario.'}
+                message={'Elige un estatus para el usuario.'}
                 arrayOpiopns={statusOptions}
                 selection={setUserStatus}
                 close={setShowStatus}
