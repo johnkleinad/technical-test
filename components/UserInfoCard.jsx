@@ -3,7 +3,6 @@ import { FadeInModal } from './Animate';
 import ModalOptions from './ModalOptions';
 import { IoCopy, IoCreateOutline } from "react-icons/io5";
 import UseUpdateUser from '../hooks/UseUpdateUser';
-import { User } from '../model/user'
 
 const UserInfoCard = ({ data, getUser }) => {
     const { firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id, status } = data
