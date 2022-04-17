@@ -62,7 +62,7 @@ const UserInfoCard = ({ data, getUser }) => {
                 <div className="flex justify-between whitespace-nowrap w-full">
                     <button
                         onClick={() => setShowStatus(!showStatus)}
-                        className={`${statusOptions[userStatus]} text-white rounded px-3 py-2 w-32`}>
+                        className={`${statusOptions[userStatus]} duration-500 text-white rounded px-3 py-2 w-32`}>
                         {userStatus}
                     </button>
                     <button
