@@ -5,21 +5,21 @@ import { FadeIn } from "../components/Animate";
 import { IoMoon, IoSunny, IoAdd } from "react-icons/io5";
 import UseDarkTheme from "../hooks/UseDarkTheme";
 
-const MainLayout = ({ children, title, modalOpen }) => {
+const MainLayout = ({ children, title, modalOpen, set }) => {
     const [isOnFocus, setIsOnFocus] = useState(false);
-    const [darkMode, setDarkMode] = useState(false);
-    const {theme, handleTheme} = UseDarkTheme();
+    const { theme, handleTheme } = UseDarkTheme();
     return <>
         <motion.section
-            animate={{ scale: modalOpen ? 0.91 : 1 }}
-            className={`${modalOpen && 'rounded-t-lg overflow-hidden'} fixed inset-0 bg-gray-scale-10 dark:bg-black duration-300`}>
+            animate={{ scale: modalOpen ? 0.93 : 1 }}
+            transition={{ duration: 0.1, type: 'easeInOut' }}
+            className={`${modalOpen ? 'rounded-t-lg overflow-hidden inset-x-0' : 'inset-0'} fixed  bg-gray-scale-10 dark:bg-neutral-900 duration-300`}>
             <motion.div
                 animate={{ opacity: isOnFocus ? 0 : 1, y: isOnFocus ? -100 : 0, height: isOnFocus ? 0 : 70 }}
                 transition={{ duration: 0.3, type: 'easeInOut' }}
                 className="sticky z-10 px-4 py-2 top-0 center-y justify-between">
                 <span className="text-5xl font-bold dark:text-white">{title}</span>
                 <div className="center-y">
-                    <button className="text-black dark:text-white mx-6">
+                    <button onClick={() => set(true)} className="text-black dark:text-white mx-6">
                         <IoAdd size={30} />
                     </button>
                     <button onClick={handleTheme}>

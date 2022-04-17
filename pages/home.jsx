@@ -1,26 +1,28 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { FadeInModal } from "../components/Animate";
+import CreateModal from "../components/CreateModal";
 import EditModal from "../components/EditModal";
 import UserInfoCard from "../components/UserInfoCard";
 import MainLayout from "../layout/Main";
 
 const Home = () => {
-    const [users, setUsers] = useState([])
-    const [user, setUser] = useState([])
-    const [edit, setEdit] = useState(false)
+    const [users, setUsers] = useState([]);
+    const [user, setUser] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [create, setCreate] = useState(true);
     useEffect(() => {
         fetch('/api/users')
             .then((response) => response.json())
             .then((r) => setUsers(r))
             .catch((e) => console.log(e))
-    }, [])
+    }, []);
     const getUser = (user) => {
         setUser(user)
         setEdit(true)
-    }
+    };
     return <>
-        <MainLayout title={'Usuarios'} modalOpen={edit}>
+        <MainLayout set={setCreate} title={'Usuarios'} modalOpen={edit || create}>
             <div className="my-2 pb-16 divide-y divide-neutral-300 dark:divide-neutral-600 mx-4">
                 {users.map((user, key) => <UserInfoCard
                     key={key}
@@ -42,17 +44,21 @@ const Home = () => {
                 />)}
             </div>
         </MainLayout>
+        <FadeInModal
+            show={edit}
+            className={'fixed inset-0 top-4 bg-gray-scale-10 dark:bg-neutral-900 rounded-t-lg p-4'}
+            speed={0.3}
+        >
+            <EditModal setEdit={setEdit} edit={edit} user={user} />
+        </FadeInModal>
+        <FadeInModal
+            show={create}
+            className={'fixed inset-0 top-4 bg-gray-scale-10 dark:bg-neutral-900 rounded-t-lg p-4'}
+            speed={0.3}
+        >
+            <CreateModal setCreate={setCreate} />
+        </FadeInModal>
 
-        <AnimatePresence>
-            {edit &&
-                <FadeInModal
-                    show={edit}
-                    className={'fixed inset-0 top-10 bg-gray-scale-10 dark:bg-neutral-900 rounded-t-lg p-4'}
-                    speed={0.2}
-                >
-                    <EditModal setEdit={setEdit} edit={edit} user={user} />
-                </FadeInModal>}
-        </AnimatePresence>
     </>
 }
 export default Home;
