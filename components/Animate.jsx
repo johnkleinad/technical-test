@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 
-export const FadeIn = ({ children, show, className }) => {
+export const FadeIn = ({ children, show, className, duration = 0.3 }) => {
     const variants = {
         hidden: { opacity: 0, x: 0 },
         enter: { opacity: 1, x: 0 },
@@ -15,7 +15,7 @@ export const FadeIn = ({ children, show, className }) => {
                     animate='enter'
                     exit='exit'
                     variants={variants}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    transition={{ duration: duration, ease: 'easeInOut' }}
                     className={className}
                 >
                     {children}
