@@ -3,11 +3,11 @@ import UseFromInputs from '../hooks/UseFromInputs'
 import CustomInputs from './CustomInput'
 import { NewUser } from '../model/user'
 import { useState } from 'react'
-import Router from 'next/router'
+import { useSWRConfig } from 'swr'
 
 const CreateModal = ({ setCreate }) => {
+  const { mutate } = useSWRConfig();
   const [message, setMessage] = useState();
-  console.log(Router);
   const userData = [
     'email',
     'telefono',
@@ -24,20 +24,19 @@ const CreateModal = ({ setCreate }) => {
       input: UseFromInputs('')
     }
   })
-  const submitAdd = () => {
-    if (userInputs.some((userInput) => userInput.input.value == '')) return console.log('Necestia todos los parametros');
+  const submitAdd = async () => {
+    if (userInputs.some((userInput) => userInput.input.value == '')) return setMessage('Debes llenar todos los campos');
     const body = new NewUser(userInputs.map((userInput) => userInput))
-    console.log(JSON.stringify(body));
-    fetch('/api/users', {
+    const response = await fetch('/api/users', {
       body: JSON.stringify(body),
       method: 'POST'
     })
-      .then((response) => response.json())
-      .then((r) => setMessage(r.message))
-      .catch((e) => { return console.log(e) })
+    if (!response.ok) return ('error del servidor')
+    const data = await response.json()
+    console.log(data)
+    mutate('/api/users')
     setTimeout(() => {
       setCreate(false);
-      Router.reload('/home')
     }, 500);
   }
   return <>
@@ -48,7 +47,7 @@ const CreateModal = ({ setCreate }) => {
       </div>
       <button onClick={submitAdd}>Listo</button>
     </div>
-    <div>
+    <div className='h-full overflow-y-auto pb-16'>
       {userInputs.map((input, key) => {
         return <div key={key} className="capitalize">
           <CustomInputs
@@ -57,14 +56,14 @@ const CreateModal = ({ setCreate }) => {
           />
         </div>
       })}
+      <div className="center text-green-500 my-2">
+        <span>{message}</span>
+      </div>
       <button
         onClick={submitAdd}
         className={`bg-primary-100 text-white rounded px-3 py-2 mt-2 w-full`}>
         Agregar Usuario
       </button>
-      <div className="center text-green-500 my-2">
-        <span>{message}</span>
-      </div>
     </div>
   </>
 }

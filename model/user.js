@@ -20,8 +20,8 @@ export class NewUser {
         this.familyName = values.find((value) => value.name == 'apellido paterno').input.value;
         this.lastName = values.find((value) => value.name == 'apellido materno').input.value;
         this.email = values.find((value) => value.name == 'email').input.value;
-        this.birthday = values.find((value) => value.name == 'telefono').input.value;
-        this.cel = values.find((value) => value.name == 'birthday').input.value;
+        this.birthday = values.find((value) => value.name == 'birthday').input.value;
+        this.cel = values.find((value) => value.name == 'telefono').input.value;
         this.assignedAnalyst = values.find((value) => value.name == 'analista asignado').input.value;
     }
 }
