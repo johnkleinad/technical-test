@@ -4,10 +4,12 @@ import CustomInputs from './CustomInput'
 import { NewUser } from '../model/user'
 import { useState } from 'react'
 import { useSWRConfig } from 'swr'
+import UseLoading from '../hooks/UseLoading'
 
 const CreateModal = ({ setCreate }) => {
   const { mutate } = useSWRConfig();
   const [message, setMessage] = useState();
+  const { setLoading, component } = UseLoading(false)
   const userData = [
     'email',
     'telefono',
@@ -25,7 +27,12 @@ const CreateModal = ({ setCreate }) => {
     }
   })
   const submitAdd = async () => {
-    if (userInputs.some((userInput) => userInput.input.value == '')) return setMessage('Debes llenar todos los campos');
+    setLoading(true)
+    if (userInputs.some((userInput) => userInput.input.value == '')){
+      setLoading(false)
+      setMessage('Debes llenar todos los campos');
+      return
+    }
     const body = new NewUser(userInputs.map((userInput) => userInput))
     const response = await fetch('/api/users', {
       body: JSON.stringify(body),
@@ -64,6 +71,7 @@ const CreateModal = ({ setCreate }) => {
         className={`bg-primary-100 text-white rounded px-3 py-2 mt-2 w-full`}>
         Agregar Usuario
       </button>
+      {component}
     </div>
   </>
 }
