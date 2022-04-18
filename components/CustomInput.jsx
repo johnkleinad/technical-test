@@ -1,6 +1,7 @@
 const CustomInput = ({ value, name }) => {
     const typeInput = {
         'telefono': 'tel',
+        'cel': 'tel',
         'email': 'email',
         'birthday': 'date'
     }
