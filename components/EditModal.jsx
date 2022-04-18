@@ -6,11 +6,13 @@ import { User } from '../model/user'
 import ModalOptions from "./ModalOptions";
 import Router from "next/router";
 import UseUpdateUser from "../hooks/UseUpdateUser";
+import UseLoading from "../hooks/UseLoading";
 
 const EditModal = ({ setEdit, user }) => {
     const [showStatus, setShowStatus] = useState(false);
     const [userStatus, setUserStatus] = useState(user.status);
     const [message, setMessage] = useState();
+    const load = UseLoading(false)
     const [isConfirm, setIsConfirm] = useState(false);
     const update = UseUpdateUser()
     const statusOptions = {
@@ -25,13 +27,20 @@ const EditModal = ({ setEdit, user }) => {
         }
     })
     const submitEdit = () => {
-        if (userInputs.some((userInput) => userInput.input.value == '')) return console.log('Necestia todos los parametros');
+        load.setLoading(true)
+        if (userInputs.some((userInput) => userInput.input.value == '')) {
+            load.setLoading(false)
+            setMessage('Necestia todos los parametros')
+            return
+        };
         const body = new User({ value: userInputs.map((userInput) => userInput), status: userStatus });
         update.submitUpdate(body)
-        console.log(update.res)
-        setTimeout(() => {
-            setEdit(false)
-        }, 1000);
+        if (update.res) {
+            console.log(update.res);
+            setTimeout(() => {
+                setEdit(false)
+            }, 1000);
+        }
     }
     const deleteUser = (id) => {
         fetch('/api/users', {
@@ -42,7 +51,7 @@ const EditModal = ({ setEdit, user }) => {
             .then((r) => console.log(r))
         setMessage('Usuario Eliminado con éxito')
         setTimeout(() => {
-            Router.reload('/home')
+            setEdit(false)
         }, 800);
     }
     return <>
@@ -63,6 +72,9 @@ const EditModal = ({ setEdit, user }) => {
                         />
                     </div>
             })}
+            <div className="center text-green-500">
+                <span>{message}</span>
+            </div>
             <button
                 onClick={() => setShowStatus(!showStatus)}
                 className={`${statusOptions[userStatus]} text-white rounded px-3 py-2 mt-2 w-full`}>
@@ -73,9 +85,7 @@ const EditModal = ({ setEdit, user }) => {
                 className={`bg-red-500 text-white rounded px-3 py-2 mt-2 w-full`}>
                 Eliminar Usuario
             </button>
-            <div className="center text-green-500">
-                <span>{message}</span>
-            </div>
+
         </div>
         <FadeInModal
             show={showStatus}
@@ -101,11 +111,12 @@ const EditModal = ({ setEdit, user }) => {
                 message={message}
             />
         </FadeInModal>
+        {load.component}
     </>
 }
 const ModalConfirm = ({ confirm, close, id, message }) => {
     return <>
-        <div className="bg-white/50 dark:bg-neutral-900/70 backdrop-blur-sm shadow-sm dark:text-white border dark:border-neutral-700 rounded-xl w-[280px] h-[196px]">
+        <div className="bg-white/50 dark:bg-neutral-900/70 backdrop-blur-sm shadow-sm dark:text-white border dark:border-neutral-800 rounded-xl w-[280px]">
             {
                 message ? <div className="p-5 h-full center text-center">
                     {message}
@@ -114,8 +125,10 @@ const ModalConfirm = ({ confirm, close, id, message }) => {
                         <div className="p-5 text-center text-neutral-500 font-bold">
                             <span>¿Estas seguro de eliminar este usuario?</span>
                         </div>
-                        <button onClick={() => confirm(id)} className="py-3 text-lg">Aceptar</button>
-                        <button onClick={() => close(false)} className="py-3 text-lg text-red-500">Cancelar</button>
+                        <div className="flex divide-x divide-neutral-200 dark:divide-neutral-600">
+                            <button onClick={() => confirm(id)} className="w-full py-3 text-lg">Aceptar</button>
+                            <button onClick={() => close(false)} className="w-full py-3 text-lg text-red-500">Cancelar</button>
+                        </div>
                     </div>
             }
         </div>
