@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 const UseDarkTheme = () => {
     const [theme, setTheme] = useState();
     useEffect(() => {
+        if(!localStorage.theme){
+            document.body.classList.remove('dark')
+            localStorage.theme = 'light'
+            return
+        }
         if(localStorage.theme == 'dark') {
             document.body.classList.add('dark')
             setTheme('dark') 
