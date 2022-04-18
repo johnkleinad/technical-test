@@ -3,6 +3,7 @@ import { FadeInModal } from './Animate';
 import ModalOptions from './ModalOptions';
 import { IoCopy, IoCreateOutline } from "react-icons/io5";
 import UseUpdateUser from '../hooks/UseUpdateUser';
+import moment from 'moment';
 
 const UserInfoCard = ({ data, getUser }) => {
     const { firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id, status } = data
@@ -10,6 +11,7 @@ const UserInfoCard = ({ data, getUser }) => {
     const [showStatus, setShowStatus] = useState(false);
     const [userStatus, setUserStatus] = useState(status);
     const { submitUpdate } = UseUpdateUser();
+    moment.lang('es');
     useEffect(() => {
         setUserStatus(status);
     }, [data])
@@ -51,7 +53,7 @@ const UserInfoCard = ({ data, getUser }) => {
                 <div className="flex justify-between">
                     <div className="flex flex-col">
                         <span className="text-neutral-400">F. DE NACIMIENTO</span>
-                        <span className='dark:text-white'>{birthday}</span>
+                        <span className='dark:text-white'>{moment(birthday).format('LL')}</span>
                     </div>
                     <div className="flex flex-col">
                         <span className="text-neutral-400">ANALISTA</span>
