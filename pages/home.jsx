@@ -22,12 +22,16 @@ const Home = () => {
     return <>
         <MainLayout set={setCreate} title={'Usuarios'} modalOpen={edit || create}>
             <div className="my-2 pb-16 divide-y divide-neutral-300 dark:divide-neutral-600 mx-4">
-                {data?.map((user, key) => <UserInfoCard
-                    key={key}
-                    data={user}
-                    setEdit={setEdit}
-                    getUser={getUser}
-                />)}
+                {data?.length > 0 ? data?.map((user, key) =>
+                    <UserInfoCard
+                        key={key}
+                        data={user}
+                        setEdit={setEdit}
+                        getUser={getUser}
+                    />)
+                    : <div className="center dark:text-white font-bold h-full opacity-60 my-10">
+                        <span>No hay usuarios agregados</span>
+                    </div>}
             </div>
         </MainLayout>
         <FadeInModal
