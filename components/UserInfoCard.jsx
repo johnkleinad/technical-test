@@ -34,7 +34,7 @@ const UserInfoCard = ({ data, getUser }) => {
         'COMPLETADO': 'bg-green-600'
     }
     return <>
-        <div className=' w-full flex p-2 px-0 h-[250px] text-sm mb-5'>
+        <div className='w-full flex p-2 px-0 h-[250px] text-sm'>
             <div className="flex flex-col justify-between w-full">
                 <div className="flex flex-col">
                     <span className="text-primary-50 dark:text-white font-semibold capitalize select-none">{`${firstName} ${secondName} ${familyName} ${lastName}`}</span>
