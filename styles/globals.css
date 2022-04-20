@@ -19,6 +19,11 @@ a {
 * {
   box-sizing: border-box;
 }
+.auto-grid {
+  display: grid;
+  gap: 20px 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+}
 .center-x {
   @apply flex justify-center;
 }
