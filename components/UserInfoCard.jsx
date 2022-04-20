@@ -1,13 +1,14 @@
 import { createRef, useState, useEffect } from 'react'
-import { FadeInModal } from './Animate';
+import { FadeIn, FadeInModal } from './Animate';
 import ModalOptions from './ModalOptions';
 import { IoCopy, IoCreateOutline } from "react-icons/io5";
 import UseUpdateUser from '../hooks/UseUpdateUser';
 import moment from 'moment';
+import CardInfo from './CardInfo';
 
 const UserInfoCard = ({ data, getUser }) => {
     const { firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id, status } = data
-    const [isOpenCard, setIsOpenCard] = useState();
+    const [isOpenCard, setIsOpenCard] = useState(false);
     const [showStatus, setShowStatus] = useState(false);
     const [userStatus, setUserStatus] = useState(status);
     const { submitUpdate } = UseUpdateUser();
@@ -18,9 +19,10 @@ const UserInfoCard = ({ data, getUser }) => {
     useEffect(() => {
         submitUpdate({
             firstName, secondName, familyName, lastName, email, cel, birthday, assignedAnalyst, id,
-             status: userStatus
+            status: userStatus
         })
     }, [userStatus])
+    const fullName = `${firstName}  ${secondName}  ${familyName}  ${lastName}`
     const userId = createRef();
     const copyToClipboard = (msg) => {
         userId.current.select();
@@ -37,7 +39,7 @@ const UserInfoCard = ({ data, getUser }) => {
         <div className='w-full flex p-2 px-0 h-[250px] text-sm'>
             <div className="flex flex-col justify-between w-full">
                 <div className="flex flex-col">
-                    <span className="text-primary-50 dark:text-white font-semibold capitalize select-none">{`${firstName} ${secondName} ${familyName} ${lastName}`}</span>
+                    <span className="text-primary-50 dark:text-white font-semibold capitalize select-none">{fullName}</span>
                     <button onClick={() => copyToClipboard(id)} className="text-neutral-400 center-y">
                         <IoCopy /> <span className="mx-2">ID: <input ref={userId} className='truncate select-none focus:outline-none bg-transparent' value={id} /></span>
                     </button>
@@ -77,6 +79,17 @@ const UserInfoCard = ({ data, getUser }) => {
                 <IoCreateOutline size={20} />
             </button>
         </div>
+        <FadeIn
+            show={isOpenCard}
+            className='center fixed inset-0 backdrop-blur-sm'
+        >
+            <div onClick={() => setIsOpenCard(false)} className="fixed inset-0" />
+            <CardInfo
+                data={data}
+                fullName={fullName}
+                set={setIsOpenCard}
+            />
+        </FadeIn>
         <FadeInModal
             show={showStatus}
             set={setShowStatus}
