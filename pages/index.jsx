@@ -6,10 +6,13 @@ import { useEffect } from 'react'
 export default function Home() {
   const router = useRouter()
   useEffect(() => {
+    animation()
+  }, [])
+  const animation =()=>{
     setTimeout(() => {
       router.push('/home')
     }, 3000);
-  }, [])
+  }
 
   return <>
     <div className="absolute inset-0 center bg-white">
