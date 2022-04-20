@@ -23,7 +23,7 @@ export const FadeIn = ({ children, show, className, duration = 0.3 }) => {
         </AnimatePresence>
     </>
 }
-export const FadeInModal = ({ children, show, set, className, speed = 0.4}) => {
+export const FadeInModal = ({ children, show, set, className, speed = 0.4 }) => {
     const variants = {
         hidden: { x: 0, y: 1000 },
         enter: { x: 0, y: 0 },
@@ -37,7 +37,8 @@ export const FadeInModal = ({ children, show, set, className, speed = 0.4}) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     onClick={() => set(false)}
-                    className="fixed inset-0 bg-black/30" />
+                    className="fixed inset-0 bg-black/30"
+                />
                 <motion.div
                     key={'modal'}
                     initial='hidden'
