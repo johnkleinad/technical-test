@@ -20,15 +20,16 @@ const Home = () => {
         setEdit(true)
     };
     return <>
-        <MainLayout set={setCreate} title={'Usuarios'} modalOpen={edit || create}>
-            <div className="my-2 pb-16 divide-y divide-neutral-300 dark:divide-neutral-600 mx-4">
+        <MainLayout getUser={getUser} set={setCreate} title={'Usuarios'} modalOpen={edit || create}>
+            <div className="my-2 pb-16 divide-y divide-neutral-300 dark:divide-neutral-600 md:divide-y-0 mx-4 auto-grid">
                 {data?.length > 0 ? data?.map((user, key) =>
-                    <UserInfoCard
-                        key={key}
-                        data={user}
-                        setEdit={setEdit}
-                        getUser={getUser}
-                    />)
+                    <div key={key} className="md:border md:dark:border-neutral-700 md:px-2 md:rounded-md ">
+                        <UserInfoCard
+                            data={user}
+                            setEdit={setEdit}
+                            getUser={getUser}
+                        />
+                    </div>)
                     : <div className="center dark:text-white font-bold h-full opacity-60 my-10">
                         <span>No hay usuarios agregados</span>
                     </div>}
