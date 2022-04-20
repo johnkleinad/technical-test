@@ -5,7 +5,7 @@ import { FadeIn } from "../components/Animate";
 import { IoMoon, IoSunny, IoAdd } from "react-icons/io5";
 import UseDarkTheme from "../hooks/UseDarkTheme";
 
-const MainLayout = ({ children, title, modalOpen, set }) => {
+const MainLayout = ({ children, title, modalOpen, set, getUser }) => {
     const [isOnFocus, setIsOnFocus] = useState(false);
     const { theme, handleTheme } = UseDarkTheme();
     return <>
@@ -34,7 +34,7 @@ const MainLayout = ({ children, title, modalOpen, set }) => {
                 </div>
             </motion.div>
             <div className={`${isOnFocus ? 'mt-4' : 'mt-20'} duration-200 overflow-y-auto h-full fixed inset-0 `}>
-                <SearchBar isOnFocus={isOnFocus} setIsOnFocus={setIsOnFocus} />
+                <SearchBar getUser={getUser } isOnFocus={isOnFocus} setIsOnFocus={setIsOnFocus} />
                 <FadeIn show={!isOnFocus} className='mx-2'>
                     {children}
                 </FadeIn>
